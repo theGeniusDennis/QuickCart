@@ -1,6 +1,7 @@
 const { User } = require('../db/models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const Op = require('sequelize').Op;
 
 const userController = {
   // Register a new user

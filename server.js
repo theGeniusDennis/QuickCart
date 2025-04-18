@@ -10,6 +10,8 @@ const { sequelize } = require('./db/models/index')
 // Import routes
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
+const cartRoutes = require('./routes/cartRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 const app = express();
 const port = process.env.PORT || 5050;
@@ -25,6 +27,8 @@ app.use(helmet());
 // API Routes
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/orders", orderRoutes);
 
 // Test DB connection
 sequelize.authenticate()
@@ -33,7 +37,7 @@ sequelize.authenticate()
     console.log('Database name:', sequelize.config.database);
     console.log('Database host:', sequelize.config.host);
     console.log('Database port:', sequelize.config.port);
-    
+
     // Only start the server if database connection is successful
     app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
@@ -46,7 +50,7 @@ sequelize.authenticate()
       code: err.code,
       sqlState: err.sqlState
     });
-    process.exit(1); // Exit the process if database connection fails
+    process.exit(1); // Exit the process if database connkkkection fails
   });
 
 // Error handling middleware
